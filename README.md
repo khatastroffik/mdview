@@ -1,12 +1,18 @@
 # Markdown Viewer
+<!-- markdownlint-disable-next-line MD033-->
+[<img src="./doc/screenshot-thumb.png" width="500">](./doc/screenshots.md "display the full sized screenshot(s)")
 
-[<img src="doc/screenshot-thumb.png" width="500">](doc/screenshots.md "display the full sized screenshot(s)")
+## Summary
 
-A standalone application that **renders and displays Markdown files**. It does nothing else! No direct editing nor any fancy note taking features. It is not distributed as a browser extension nor does it fire up a web server - so no web browser is needed to see the rendered Markdown file.
+A standalone application that **renders and displays Markdown files** (no editing nor any fancy note taking feature) on Windows 10 (installer or zip) and Debian/Ubuntu Linux (AppImage) clients.
 
-It renders many additional features from [the `markdown-it` demo](https://markdown-it.github.io/).
+This application is based on the [Electron](https://www.electronjs.org/languages/en-US) framework: a free and open-source software framework used to develop and build cross-platform (Mac, Windows, and Linux) desktop apps with JavaScript, HTML, and CSS.
 
-Following plugins are supported:
+You may encounter some *well-known issues* (see "Known issues" below), while installing or running the *Electron based applications*.
+
+## Markdown
+
+The application renders **standard markdown** (see [Basic Syntax](https://www.markdownguide.org/basic-syntax/)) formated files and supports **additional features** as provided by the following [markdown-it](https://github.com/markdown-it/markdown-it) plugins.
 
 - [`markdown-it-abbr`](https://github.com/markdown-it/markdown-it-abbr)
 - [`markdown-it-container`](https://github.com/markdown-it/markdown-it-container)
@@ -18,56 +24,82 @@ Following plugins are supported:
 - [`markdown-it-sub`](https://github.com/markdown-it/markdown-it-sub)
 - [`markdown-it-sup`](https://github.com/markdown-it/markdown-it-sup)
 
-## Note on Windows installation and download security
+## Development
 
-Issues occurred with browser download security features and Windows SmartScreen. I checked both, the Windows Setup-EXE and the ZIP file in [VirusTotal](https://www.virustotal.com) and no engine detected anything at upload time.
+The tool is currently developed and tested under Windows 10 (X64).
 
-I don't know yet, how to prevent these blockings without paying an annual fee.
+### Requirements
 
-### Startup speed
+An actual [Node.js](https://nodejs.org/) and NPM version (usually installed together with Node.js) are required to setup a development environment.
 
-The application may have a delay at startup. This delay may be caused by Windows Defender. See [my comment in Electron issue #29868](https://github.com/electron/electron/issues/29868#issuecomment-869049066) and [this StackOverflow question](https://stackoverflow.com/questions/67982430/windows-defender-slowing-down-electron-startup). Other virus scanner may also cause a delay.
+You may also prefer to use **NVM** on windows and on Linux. See:
 
-As a workaround to remove this delay, you can add the path to the `mdview.exe` to the exclusion list of your virus scanner. The default installation path of the setup file are:
+- [Install nvm, node.js and npm on Windows](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows)
+- [Install nvm, node.js and npm on Linux, unix, macOS, and windows WSL](https://github.com/nvm-sh/nvm#about)
 
-- `C:\Program Files\mdview` for system wide installation
-- `%appdata%\..\Local\Programs\mdview` for installation in the user account (non elevated)
+### Source code and project setup
 
-## Developing
+Clone the github repository and install the project dependencies:
 
-The tool is developed and tested only under Windows (7 and newer) 64 Bit yet.
+```shell
+git clone https://github.com/khatastroffik/mdview.git
+cd mdview
+npm install
+```
 
-[Node.js](https://nodejs.org/en/) including the NPM package manager is needed. If your Node.js version is too old, the unit tests and some other scripts may fail because of syntax errors. On a Linux machine you can [use NVM](https://www.freecodecamp.org/news/how-to-install-node-js-on-ubuntu-and-update-npm-to-the-latest-version/) to install the latest LTS version.
+To **start** an instance of the **application**, type `npm start`.
 
-After cloning the Git repository, type `npm install`. NPM may put some warnings while installing the packages.
+To **generate** the different application **packages/binaries**, type `npm run dist`. This will generate the artifacts (installer, AppImage or compressed archive) depending on your Operating System. MacOS binaries cannot be generated at the present time due to builder settings/properties related issues. Pull requests are welcome!
 
-To start an instance while development, type `npm start`.
-
-Binaries can be built by typing `npm run dist`. Under Windows, a ZIP package and a Setup.exe will be built. Under Linux, an AppImage file will be generated - though it is not tested by the author yet. MacOS is not tested yet and there are properly some settings missing to build the proper packages. Pull requests are welcome!
-
-The icon is made with help of [Inkscape](https://inkscape.org/en/) and [ImageMagick](https://www.imagemagick.org). While the application icon does not look too bad, a proper icon for Markdown *documents* is missing yet.
-
-Note: you may encounter some issue when trying to build the electron distribution i.e. the build may (partially) fail.
-A possible fix is described here [not able to build installer/uninstaller (ERR_ELECTRON_BUILDER_CANNOT_EXECUTE)](doc/development-build-installer-issue.md)
+To **re-generate** the **icons** under Windows, use the script `generate-icons.cmd` provided in the `icon`  folder. This script rely on [ImageMagick](https://www.imagemagick.org), which thus needs to be installed.
 
 ### Debugging
 
-The main process can be debugged with [Visual Studio Code](https://code.visualstudio.com/). A `launch.json` is in the repository.
+The main process can be debugged with [Visual Studio Code](https://code.visualstudio.com/). A `launch.json` is provided in the `.vscode` folder within this repository.
 
-The renderer process (`index.html` and `index.js`) must be debugged with help of the Electron development tools by calling in the main menu "Tools" -> "Developer tools" or by pressing the F10 key.
+The renderer process (implemented in `index.html` and `index.js`) must be debugged with help of the Electron development tools by calling in the main menu &#128514; "Tools" 🡒 "Developer tools" or by pressing the \[F10\] key.
 
-### Note for Windows
+### Contribution
 
-See [section Startup speed](#startup-speed) above. If you observe a big delay at application startup, you should add the  development path of the application to your virus scanner exclusion list. This workaround may also help with other Electron applications.
+Please see the [Contributing](./CONTRIBUTING.md) guideline.
+
+## Known issues
+
+The following "potential" issues are well-known:
+
+### Windows installation and download security
+
+An issue may occur due to some *browser download security* features or *Windows SmartScreen* technology. Anyhow, the provided package should be safe, though prefer to check them using an antivirus scanner like [VirusTotal](https://www.virustotal.com).
+
+### Startup speed
+
+The application may have a delay at startup. This delay may be caused by Windows Defender.This may be due to your virus scanner e.g. Windows Defender.
+
+### Build error *ERR_ELECTRON_BUILDER_CANNOT_EXECUTE* (development)
+
+You may encounter some issue when trying to build the electron distribution (binaries) i.e. the build may (partially) fail.
+
+A possible fix is described here [not able to build installer/uninstaller (ERR_ELECTRON_BUILDER_CANNOT_EXECUTE)](./doc/development-build-installer-issue.md)
+
+## Credits
+
+The original application has been created by [Christian Dreier](https://github.com/c3er): **many thanks for your inspiration!**
+
+This application is based on version 2.0.0 of the above mentioned application. See the repository containing the original code of this application on [GitHub](https://github.com/c3er/mdview).
 
 ## Copyright and License
 
-This tool is made by Christian Dreier. If you find a copy somewhere, you find the original at [GitHub](https://github.com/c3er/mdview).
+This application is provided under the [**MIT** license](./LICENSE).
 
-You can use and copy this tool under the conditions of the MIT license.
+A [K11K](./K11K.md) production.
 
-## Todo
-
-- Remember position of last opened window
-  - Additional windows shall not open at the same place as the last window
-- Recognize the character encoding to display special characters automatically
+```text
+╭━┳━╭━╭━╮╮
+┃┈┈┈┣▅╋▅┫
+┃┈┃┈╰━╰━━━━━━╮             "K11K"
+╰┳╯┈┈┈┈┈┈┈┈┈◢▉◣    A very pragmatic dog
+ ┃┈┈┈┈┈┈┈┈┈┈▉▉▉   
+ ┃┈┈┈┈┈┈┈┈┈┈◥▉◤
+ ┃┈┈┈┈╭━┳━━━━╯
+ ┣━━━━━━┫
+```

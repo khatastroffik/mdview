@@ -18,4 +18,6 @@ exports.messages = {
     unblockURL: "unblock-url",
     viewRawText: "view-raw-text",
     changeHighlightjsStyle: "change-highlightjs-style",
+    showErrorDialog: "show-error-dialog",
+    showSuccessDialog: "show-success-dialog",
 }

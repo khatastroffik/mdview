@@ -2,10 +2,10 @@
 
 [back to README](../README.md)
 
-## version 2.1.0
+## *light* theme
 
 ![Screenshot v2.1.0](screenshot-fullsize.png)
 
-## version 1.4.1
+## *dark* theme
 
-![Screenshot v1.4.1](screenshot.png)
+![Screenshot v2.1.0](screenshot-fullsize-dark.png)

@@ -1,6 +1,6 @@
 const fs = require("fs")
 const iconv = require("iconv-lite")
-
+const path = require( 'path' )
 const common = require("./common")
 
 function readBytesSync(filePath, filePosition, numBytesToRead) {
@@ -44,3 +44,9 @@ exports.isText = filePath => {
 }
 
 exports.open = (filePath, encoding) => iconv.decode(fs.readFileSync(filePath), encoding)
+
+function changeFileExtension(filePath, newFileExtension) {
+  return path.format({ ...path.parse(filePath), base: undefined, ext: newFileExtension })
+}
+
+module.exports.changeFileExtension = changeFileExtension

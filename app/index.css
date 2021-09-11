@@ -1,147 +1,174 @@
 .markdown-body ol ol,
 .markdown-body ul ol {
-    list-style-type: decimal;
+  list-style-type: decimal;
 }
 
 .markdown-body ul ul ol,
 .markdown-body ul ol ol,
 .markdown-body ol ul ol,
 .markdown-body ol ol ol {
-    list-style-type: decimal;
+  list-style-type: decimal;
 }
 
 .md-raw {
-    white-space: pre-wrap;
+  white-space: pre-wrap;
 }
 
 #raw-text {
-    display: none;
+  display: none;
 }
 
 div.info {
-    background-color: #a6dcef;
+  background-color: #a6dcef;
 }
 
 div.warning {
-    background-color: #f5fac8;
+  background-color: #f5fac8;
 }
 
 div.error {
-    background-color: #f7b3a7;
+  background-color: #f7b3a7;
 }
 
 #status-bar {
-    background-color: #fff;
-    bottom: 0;
-    color: #555;
-    height: 20px;
-    left: 0;
-    position: fixed;
-    right: 0;
-    border-top: 1px solid #ccc;
+  background-color: #fff;
+  bottom: 0;
+  color: #555;
+  height: 20px;
+  left: 0;
+  position: fixed;
+  right: 0;
+  border-top: 1px solid #ccc;
 }
 
 #status-text {
-    font-family: Sans-serif;
-    font-size: 9pt;
-    line-height: 0;
-    padding-left: 10px;
-    vertical-align: middle;
-    white-space: nowrap;
-    display: unset;
+  font-family: Sans-serif;
+  font-size: 9pt;
+  line-height: 0;
+  padding-left: 10px;
+  vertical-align: middle;
+  white-space: nowrap;
+  display: unset;
 }
 #menu-border {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 0px;
-    border-bottom: 1px solid #ccc;
-    background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0px;
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
 }
 
 #blocked-content-info {
-    background-color: #ffffe1;
-    border-bottom-style: solid;
-    border-top-style: solid;
-    border-color: #ddd;
-    border-width: 1px;
-    color: black;
-    cursor: pointer;
-    height: 30px;
-    left: 0;
-    line-height: 30px;
-    overflow: hidden;
-    position: fixed;
-    right: 0;
-    text-align: left center;
-    top: 0;
+  background-color: #ffffe1;
+  border-bottom-style: solid;
+  border-top-style: solid;
+  border-color: #ddd;
+  border-width: 1px;
+  color: black;
+  cursor: pointer;
+  height: 30px;
+  left: 0;
+  line-height: 30px;
+  overflow: hidden;
+  position: fixed;
+  right: 0;
+  text-align: left center;
+  top: 0;
 }
 
 .blocked-content-info-text {
-    font-family: Sans-serif;
-    font-size: 10pt;
-    margin-bottom: 0px;
-    margin-top: 0px;
-    padding-left: 10px;
-    padding-right: 10px;
+  font-family: Sans-serif;
+  font-size: 10pt;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #blocked-content-info-text-container {
-    display: table-cell;
-    width: 100%;
+  display: table-cell;
+  width: 100%;
 }
 
 #blocked-content-info-close-button {
-    display: table-cell;
+  display: table-cell;
 }
 
 body {
-    margin: 10px 15px 35px 15px;
+  margin: 10px 15px 35px 15px;
 }
 
 @media (prefers-color-scheme: dark) {
-    div.info {
-        background-color: #726a95;
-    }
+  div.info {
+    background-color: #726a95;
+  }
 
-    div.warning {
-        background-color: #ba6b57;
-    }
+  div.warning {
+    background-color: #ba6b57;
+  }
 
-    div.error {
-        background-color: #8f4068;
-    }
+  div.error {
+    background-color: #8f4068;
+  }
 
-    #raw-text {
-        color: #f8f8f2;
-    }
+  #raw-text {
+    color: #f8f8f2;
+  }
 
-    #status-bar {
-        border-top: 1px solid black;
-        background: #292a2d;
-        color: #f8f8f2;
-    }
-    #menu-border {
-        border-bottom: 1px solid black;
-        background-color: #292a2d;
-    }
+  #status-bar {
+    border-top: 1px solid black;
+    background: #292a2d;
+    color: #f8f8f2;
+  }
+  #menu-border {
+    border-bottom: 1px solid black;
+    background-color: #292a2d;
+  }
 }
 
 @media print {
-    #blocked-content-info,
-    #status-bar {
-        display: none;
-    }
+  #menu-border,
+  #blocked-content-info,
+  #status-bar {
+    display: none;
+  }
 
-    .markdown-body pre,
-    .markdown-body pre > code {
-        overflow: visible;
-        white-space: pre-wrap;
-    }
+  .markdown-body pre,
+  .markdown-body pre > code {
+    overflow: visible;
+    white-space: pre-wrap;
+  }
 
-    p,
-    pre {
-        page-break-inside: avoid;
-    }
+  p,
+  pre {
+    page-break-inside: avoid;
+  }
 }
+
+/* custom header and footer */
+/* 
+
+@media screen {
+  #pageHeader, #pageFooter {
+    display: none;
+  }
+}
+
+@media print {
+  #pageHeader th{
+    height: 1cm;
+    border-bottom: 1px solid lightgray;
+  }
+  #pageFooter td {
+    height: 1cm;
+    border-top: 1px solid lightgray;
+  }
+
+  #headerLeft, #footerLeft {text-align: left;}
+  #headerCenter, #footerCenter {text-align: center;}
+  #headerRight, #footerRight {text-align: right;}
+} 
+
+*/

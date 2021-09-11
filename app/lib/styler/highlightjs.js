@@ -1,9 +1,37 @@
+const { BrowserWindow } = require( 'electron' )
 const { isNull } = require("lodash")
+const fs = require( "fs" )
+const  path  = require( "path" )
 const ipc = require("../ipc")
+const ApplicationSettings = require( '../settings/application-settings' )
 
 let _document
 let _currentStyleId
 const stylePrefix = "user_choosen_style_"
+
+function generateStylesSubmenu() {
+  let cssFolder = path.join( __dirname, "../../css" )
+  console.log(cssFolder);
+  let cssFilesFromDir = fs.readdirSync( cssFolder )
+  let _applicationSettings = new ApplicationSettings()
+  let win = BrowserWindow.getFocusedWindow()
+  let codeStyleSubmenu = []
+  cssFilesFromDir.forEach( file => {
+    if ( path.extname( file ) == ".css" ) {
+      let filename = path.basename( file, ".css" )
+      codeStyleSubmenu.push( {
+        label: filename,
+        type: "radio",
+        id: filename,
+        click() {
+          _applicationSettings.highlightjsStyle = filename
+          win.webContents.send( ipc.messages.changeHighlightjsStyle, filename )
+        },
+      } )
+    }
+  } )
+  return codeStyleSubmenu
+}
 
 function unloadStyle() {
   // remove the "link" tag using its ID
@@ -42,10 +70,14 @@ function loadStyle(styleName) {
     head.appendChild(link)
 }
 
-exports.init = (document, electronMock) => {
+function init (document, electronMock) {
+// exports.init = (document, electronMock) => {
     const electron = electronMock ?? require("electron")
     _document = document
     electron.ipcRenderer.on(ipc.messages.changeHighlightjsStyle, (_, styleName) => {
         loadStyle(styleName)
     })
 }
+
+module.exports.generateStylesSubmenu = generateStylesSubmenu
+module.exports.init = init
